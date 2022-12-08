@@ -11,11 +11,11 @@ fn main() {
 
     let mut vocab: VecDeque<&i64> = V.iter().take(N).collect();
 
-    let target_number;
+    let mut target_number: i64 = -1;;
     for (i, v) in V.iter().skip(N).enumerate() {
         let poss = possible_numbers(&vocab);
         if ! poss.contains(v) {
-            target_number = v;
+            target_number = *v;
             println!("{v} @ {i} is invalid");
             break;
         }
@@ -24,6 +24,26 @@ fn main() {
     }
 
     // part 2
+    let mut vv = &V[0..2];;
+    let mut found = false;
+    for m in 2..V.len() {
+        for i in 0..(V.len() - m + 1) {
+            vv = &V[i..(i+m)];
+            let s: i64 = vv.iter().sum();
+            if s == target_number {
+                println!("{m}: target found at {i} = {s}");
+                found = true;
+                break;
+            }
+        }
+        if found {
+            break;
+        }
+    }
+
+    println!("{:?}", vv);
+    let answer = vv.iter().min().unwrap() + vv.iter().max().unwrap();
+    println!("{}", answer);
 }
 
 fn possible_numbers(vocab: &VecDeque<&i64>) -> HashSet<i64> {
