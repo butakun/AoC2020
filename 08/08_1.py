@@ -1,3 +1,6 @@
+import argparse
+
+
 def main(filename):
     with open(filename) as f:
         insts = [line.strip().split() for line in f]
@@ -27,4 +30,7 @@ def main(filename):
 
 
 if __name__ == "__main__":
-    main("input.txt")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input")
+    args = parser.parse_args()
+    main(args.input)

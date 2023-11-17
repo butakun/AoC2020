@@ -48,4 +48,8 @@ def run(insts):
 
 
 if __name__ == "__main__":
-    main("input.txt")
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input")
+    args = parser.parse_args()
+    main(args.input)
