@@ -50,7 +50,7 @@ def main(filename):
         if color not in graph:
             return
         for outer in graph[color]:
-            if outer not in color:
+            if outer not in discovered:
                 dfs(outer)
 
     dfs("shiny gold")
@@ -60,4 +60,5 @@ def main(filename):
 
 
 if __name__ == "__main__":
-    main("input.txt")
+    import sys
+    main(sys.argv[1])
